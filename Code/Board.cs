@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState{
+    move,
+    win,
+    lose,
+}
+
 public class Board : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -13,6 +19,24 @@ public class Board : MonoBehaviour
     public GameObject[] symbols;
     public GameObject[,] allSymbols;
     public ScoreManager scoreManager;
+    public GameState currentState = GameState.move;
+    public World world;
+    public int level;
+
+
+    private void Awake(){
+        if(world != null){
+            if(level < world.levels.Length){
+                if(world.levels[level] != null){
+                width = world.levels[level].width;
+                height = world.levels[level].height;
+                }
+
+            
+            }
+            
+        }
+    }
 
 
     void Start()

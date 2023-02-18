@@ -18,12 +18,14 @@ public class Symbol : MonoBehaviour
 	public Sprite Tick;
 	public float swipeThreshold = .2f;
     public bool increasedScore = false;
+    private EndGameManager endGameManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
     	board = FindObjectOfType<Board>();
+        endGameManager = FindObjectOfType<EndGameManager>();
     	targetX = (int)transform.position.x;
     	targetY = (int)transform.position.y;
     	row = targetY;
@@ -107,6 +109,9 @@ public class Symbol : MonoBehaviour
 	        otherSymbol.GetComponent<Symbol>().row -= rowMove;
 	        column += columnMove;
 	        row += rowMove;
+            if(endGameManager != null){
+                endGameManager.DecreaseMoveCount();
+            }
         }
     }
 
